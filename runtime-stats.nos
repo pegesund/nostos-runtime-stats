@@ -1,33 +1,42 @@
 # Runtime Stats Nostlet
 # Displays runtime information and statistics
+#
+# Keys:
+#   'r' - Refresh display
+#   'Esc' or 'Ctrl+W' - Close panel
 
 nostlet_name() = "Runtime Stats"
 
 nostlet_description() = "Display runtime statistics"
 
 # State
-mvar refresh_count: Int = 0
 mvar last_key: String = ""
 
 render() = {
+    threads = Runtime.threadCount()
+    uptime = Runtime.uptimeMs()
+    memory = Runtime.memoryKb()
+    pid = Runtime.pid()
+    key = last_key
+
+    # Format uptime as seconds with 1 decimal
+    uptime_secs = uptime / 1000
+    uptime_ms = (uptime % 1000) / 100
+
+    # Format memory as MB with 1 decimal
+    memory_mb = memory / 1024
+    memory_kb_rem = (memory % 1024) / 100
+
     "=== NOSTOS RUNTIME STATS ===\n\n" ++
-    "Refresh count: " ++ show(refresh_count) ++ "\n" ++
-    "Last key: " ++ last_key ++ "\n\n" ++
-    "Keys:\n" ++
-    "  '+' - Increment counter\n" ++
-    "  '-' - Decrement counter\n" ++
-    "  'r' - Refresh\n" ++
-    "  'Esc' - Close\n"
+    "  CPU Threads:  " ++ show(threads) ++ "\n" ++
+    "  Uptime:       " ++ show(uptime_secs) ++ "." ++ show(uptime_ms) ++ " s\n" ++
+    "  Memory:       " ++ show(memory_mb) ++ "." ++ show(memory_kb_rem) ++ " MB\n" ++
+    "  PID:          " ++ show(pid) ++ "\n\n" ++
+    "  Last key:     " ++ key ++ "\n\n" ++
+    "Keys: 'r' refresh | Esc close\n"
 }
 
 onKey(key) = {
     last_key = key
-    if key == "+" then {
-        refresh_count = refresh_count + 1
-        ()
-    } else if key == "-" then {
-        refresh_count = refresh_count - 1
-        ()
-    } else
-        ()
+    ()
 }

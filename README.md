@@ -5,9 +5,11 @@ A nostlet (plugin panel) for the Nostos TUI that displays runtime statistics.
 ## Stats Displayed
 
 - **CPU Threads**: Number of available CPU threads
+- **OS Threads**: Actual number of OS threads in the process
 - **Uptime**: Time since the TUI started (seconds)
 - **Memory**: Current process memory usage (MB)
 - **PID**: Process ID
+- **Load Averages**: 1, 5, and 15 minute system load averages
 
 ## Installation
 
@@ -22,6 +24,7 @@ Or manually copy `runtime-stats.nos` to `~/.nostos/nostlets/`
 1. Start the Nostos TUI: `nostos tui`
 2. Press `Ctrl+N` to open the nostlet picker
 3. Select "Runtime Stats"
+4. Use `Ctrl+Left/Right` to navigate between windows
 
 ## Keys
 

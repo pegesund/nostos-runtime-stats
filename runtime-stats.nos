@@ -17,6 +17,8 @@ render() = {
     uptime = Runtime.uptimeMs()
     memory = Runtime.memoryKb()
     pid = Runtime.pid()
+    num_threads = Runtime.numThreads()
+    (load1, load5, load15) = Runtime.loadAvg()
     key = last_key
 
     # Format uptime as seconds with 1 decimal
@@ -28,11 +30,13 @@ render() = {
     memory_kb_rem = (memory % 1024) / 100
 
     "=== NOSTOS RUNTIME STATS ===\n\n" ++
-    "  CPU Threads:  " ++ show(threads) ++ "\n" ++
-    "  Uptime:       " ++ show(uptime_secs) ++ "." ++ show(uptime_ms) ++ " s\n" ++
-    "  Memory:       " ++ show(memory_mb) ++ "." ++ show(memory_kb_rem) ++ " MB\n" ++
-    "  PID:          " ++ show(pid) ++ "\n\n" ++
-    "  Last key:     " ++ key ++ "\n\n" ++
+    "  CPU Threads:   " ++ show(threads) ++ "\n" ++
+    "  OS Threads:    " ++ show(num_threads) ++ "\n" ++
+    "  Uptime:        " ++ show(uptime_secs) ++ "." ++ show(uptime_ms) ++ " s\n" ++
+    "  Memory:        " ++ show(memory_mb) ++ "." ++ show(memory_kb_rem) ++ " MB\n" ++
+    "  PID:           " ++ show(pid) ++ "\n\n" ++
+    "  Load (1/5/15): " ++ show(load1) ++ " / " ++ show(load5) ++ " / " ++ show(load15) ++ "\n\n" ++
+    "  Last key:      " ++ key ++ "\n\n" ++
     "Keys: 'r' refresh | Esc close\n"
 }
 

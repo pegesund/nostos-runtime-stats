@@ -5,7 +5,9 @@ A nostlet (plugin panel) for the Nostos TUI that displays runtime statistics.
 ## Stats Displayed
 
 - **CPU Threads**: Number of available CPU threads
-- **OS Threads**: Actual number of OS threads in the process
+- **OS Threads**: Total number of OS threads in the process
+- **Tokio Workers**: Number of tokio async worker threads
+- **Blocking Threads**: Number of tokio blocking threads
 - **Uptime**: Time since the TUI started (seconds)
 - **Memory**: Current process memory usage (MB)
 - **PID**: Process ID

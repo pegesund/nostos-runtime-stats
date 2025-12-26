@@ -1,11 +1,5 @@
 # Runtime Stats Nostlet
 # Displays runtime information and statistics
-#
-# Keys:
-#   'r' - Refresh display
-#   '+' - Increment refresh counter
-#   '-' - Decrement refresh counter
-#   'Esc' or 'Ctrl+W' - Close panel
 
 nostlet_name() = "Runtime Stats"
 
@@ -16,40 +10,14 @@ mvar refresh_count: Int = 0
 mvar last_key: String = ""
 
 render() = {
-    count = refresh_count
-    key = last_key
-
-    "╔══════════════════════════════════════╗\n" ++
-    "║       NOSTOS RUNTIME STATS           ║\n" ++
-    "╠══════════════════════════════════════╣\n" ++
-    "║                                      ║\n" ++
-    "║  Refresh count: " ++ pad(show(count), 18) ++ "  ║\n" ++
-    "║  Last key:      " ++ pad(key, 18) ++ "  ║\n" ++
-    "║                                      ║\n" ++
-    "╠══════════════════════════════════════╣\n" ++
-    "║  Keys:                               ║\n" ++
-    "║    'r' - Refresh                     ║\n" ++
-    "║    '+' - Increment counter           ║\n" ++
-    "║    '-' - Decrement counter           ║\n" ++
-    "║    'Esc' - Close                     ║\n" ++
-    "╚══════════════════════════════════════╝\n"
-}
-
-# Pad string to given length
-pad(s: String, len: Int) = {
-    slen = String.length(s)
-    if slen >= len then
-        s
-    else
-        s ++ spaces(len - slen)
-}
-
-# Generate n spaces
-spaces(n: Int) = {
-    if n <= 0 then
-        ""
-    else
-        " " ++ spaces(n - 1)
+    "=== NOSTOS RUNTIME STATS ===\n\n" ++
+    "Refresh count: " ++ show(refresh_count) ++ "\n" ++
+    "Last key: " ++ last_key ++ "\n\n" ++
+    "Keys:\n" ++
+    "  '+' - Increment counter\n" ++
+    "  '-' - Decrement counter\n" ++
+    "  'r' - Refresh\n" ++
+    "  'Esc' - Close\n"
 }
 
 onKey(key) = {
